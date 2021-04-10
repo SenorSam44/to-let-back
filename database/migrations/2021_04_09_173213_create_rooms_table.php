@@ -16,7 +16,9 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->integer('residence_id');
-            $table->
+            $table->tinyInteger('type');
+            $table->tinyInteger('attached_bath');
+            $table->tinyInteger('balconies');
             $table->timestamps();
         });
     }
