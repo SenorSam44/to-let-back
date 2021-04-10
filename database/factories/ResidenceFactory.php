@@ -39,11 +39,11 @@ class ResidenceFactory extends Factory
             'price' => $this->faker->numberBetween(1000, 100000),
             'service_charge' => $this->faker->numberBetween(100, 1000),
             'price_options' => json_encode($this->faker->randomElements(['negotiable', 'electricity', 'gas'])),
-            'available_from' => $this->faker->numberBetween(1,12),
+            'available_from' => $this->faker->numberBetween(0,12),
             'preferred_rental' => json_encode($this->faker->randomElements(['small', 'male', 'female'])),
             'details' => $this->faker->text,
             'other_facilities' =>json_encode( $this->faker->randomElements(['small', 'male', 'female'])),
-            'image' => json_encode($this->faker->randomElements(['/public/images/'.$this->faker->randomDigitNotNull.'jpeg', '/public/images/'.$this->faker->randomDigitNotNull.'jpg', '/public/images/'.$this->faker->randomDigitNotNull.'png'])),
+            'image' => json_encode($this->faker->randomElements(['/public/images/'.$this->faker->randomDigitNotNull.'.jpeg', '/public/images/'.$this->faker->randomDigitNotNull.'.jpg', '/public/images/'.$this->faker->randomDigitNotNull.'.png'])),
 
         ];
     }

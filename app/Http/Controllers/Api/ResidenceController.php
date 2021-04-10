@@ -33,8 +33,9 @@ class ResidenceController extends Controller
 
     public function store(ResidenceStoreRequest $request)
     {
+//        ResidenceStoreRequest::create($request);
 
-        return response()->json(true);
+        return response()->json($request);
     }
 
     /**

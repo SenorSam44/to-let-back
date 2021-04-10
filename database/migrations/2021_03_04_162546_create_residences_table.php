@@ -26,7 +26,7 @@ class CreateResidencesTable extends Migration
             $table->tinyInteger('dinning_type');
             $table->integer('price');
             $table->integer('service_charge')->default(0);
-            $table->string('price_options');
+            $table->string('price_options')->nullable();
             $table->integer('available_from');
             $table->string('preferred_rental')->nullable();
             $table->longText('details')->nullable();

@@ -13,7 +13,7 @@ class ResidenceStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class ResidenceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            ''
+            'type' => 'required|number|max:1',
+            'category' => 'required|number|max:5',
+            'owner_id' => 'required|number',
+            'location' => 'string',
+            'size' => 'required|number',
+            'facing' => 'required|string',
+            'floor_no' => 'required|number|max:200',
+            'floor_type' => 'required|number|max:3',
+            'dinning_type' => 'required|number|max:5',
+            'price' => 'required|number',
+            'service_charge'  => 'number',
+            'price_options' => 'string',
+            'available_from' => 'required|number|max:12',
+            'preferred_rental'  => 'number',
+            'details' => 'string',
         ];
     }
 }
