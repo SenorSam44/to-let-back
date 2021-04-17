@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ResidenceStoreRequest;
+use App\Models\Residence;
 use Illuminate\Http\Request;
 
-class ResidenceController extends Controller
+class HomeController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return response()->json("hi");
+
+        return response()->json(Residence::all());
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create()
     {
@@ -27,26 +26,23 @@ class ResidenceController extends Controller
     }
 
     /**
-     * @param ResidenceStoreRequest $request
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-
-    public function store(ResidenceStoreRequest $request)
+    public function store(Request $request)
     {
-//        ResidenceStoreRequest::create($request);
-
-        return response()->json($request);
+        //
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        return response()->json(Residence::all()->first());
     }
 
     /**
