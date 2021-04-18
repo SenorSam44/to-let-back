@@ -24,21 +24,37 @@ class ResidenceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|number|max:1',
-            'category' => 'required|number|max:5',
-            'owner_id' => 'required|number',
-            'location' => 'string',
-            'size' => 'required|number',
+            'type' => 'required|numeric|max:1',
+            'category' => 'required|numeric|max:5',
+            'location' => 'required|string',
+            'size' => 'required|numeric',
             'facing' => 'required|string',
-            'floor_no' => 'required|number|max:200',
-            'floor_type' => 'required|number|max:3',
-            'dinning_type' => 'required|number|max:5',
-            'price' => 'required|number',
-            'service_charge'  => 'number',
-            'price_options' => 'string',
-            'available_from' => 'required|number|max:12',
-            'preferred_rental'  => 'number',
-            'details' => 'string',
+            'floor_no' => 'required|numeric|max:200',
+            'floor_type' => 'required|numeric|max:3',
+            'dinning_type' => 'required|numeric|max:5',
+            'price' => 'required|numeric',
+            'service_charge'  => 'nullable|numeric',
+            'price_options' => 'nullable|string',
+            'available_from' => 'required|numeric|max:12',
+            'preferred_rental'  => 'nullable|numeric',
+            'details' => 'nullable|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'type.required' => 'Valid type is required',
+            'category.required' => 'Valid category is required',
+            'location.required' => 'Valid location is required',
+            'size.required' => 'Valid size is required',
+            'facing.required' => 'Valid facing is required',
+            'floor_no.required' => 'Valid floor number is required',
+            'floor_type.required' => 'Valid floor type is required',
+            'dinning_type.required' => 'Valid dinning type is required',
+            'price.required' => 'Valid price is required',
+            'service_charge'  => 'Valid service charge is required',
+            'price_options' => 'Valid price options are required',
         ];
     }
 }

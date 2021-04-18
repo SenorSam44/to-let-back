@@ -29,5 +29,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/addetails', [HomeController::class, 'show']);
 
 Route::middleware('auth:api')->group(function (){
-    Route::apiResource('/residence', ResidenceController::class);
+    Route::resource('residence', ResidenceController::class);
 });

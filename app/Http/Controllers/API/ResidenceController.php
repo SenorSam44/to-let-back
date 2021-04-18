@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ResidenceStoreRequest;
 use App\Models\Residence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResidenceController extends Controller
 {
@@ -34,15 +35,29 @@ class ResidenceController extends Controller
 
     public function store(ResidenceStoreRequest $request)
     {
-        ResidenceStoreRequest::create($request);
+        $validated = $request->validated();
+//        if (auth('api')->id() != null) {
+//            error_log("if 1");
+//            $user_id = auth('api')->id();
+//        } elseif (Auth::id() != null) {
+//            error_log("if 2");
+//            $user_id = Auth::id();
+//        } elseif (isset($request->user()->id) && $request->user()->id != null) {
+//            error_log("if 3");
+//            $user_id = $request->user()->id;
+//        }else{
+//            $user_id = 1009;
+//        }
+        $validated['owner_id'] = auth('api')->id();
+        Residence::create($validated);
 
-        return response()->json($request);
+        return response()->json($validated);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +68,7 @@ class ResidenceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +79,8 @@ class ResidenceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +91,7 @@ class ResidenceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
