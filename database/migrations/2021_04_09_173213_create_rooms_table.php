@@ -17,8 +17,8 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->integer('residence_id');
             $table->tinyInteger('type');
-            $table->tinyInteger('attached_bath');
-            $table->tinyInteger('balconies');
+            $table->boolean('attached_bathroom');
+            $table->boolean('attached_balcony');
             $table->timestamps();
         });
     }

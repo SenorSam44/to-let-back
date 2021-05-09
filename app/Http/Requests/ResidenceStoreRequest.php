@@ -25,7 +25,7 @@ class ResidenceStoreRequest extends FormRequest
     {
         return [
             'type' => 'required|numeric|max:1',
-            'category' => 'required|numeric|max:5',
+            'category' => 'required|numeric|max:10',
             'property_size' => 'required|numeric',
             'facing' => 'required|string',
             'floor_no' => 'required|numeric|max:200',

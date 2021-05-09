@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResidenceStoreRequest;
 use App\Models\Residence;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,9 +36,19 @@ class ResidenceController extends Controller
 
     public function store(ResidenceStoreRequest $request)
     {
-        $validated = $request->validated();
+        $validated= $request->validated();
         $validated['owner_id'] = $request->user()->id;
-        Residence::create($validated);
+        $residence = Residence::create($validated);
+
+        $rooms = json_decode(json_encode($request->room_details), true);
+        foreach($rooms as $room){
+            Room::create([
+                'residence_id' => $residence->id,
+                'type' => $room['room_type'],
+                'attached_bathroom' => $room['attached_bathroom'],
+                'attached_balcony' => $room['attached_balconies'],
+            ]);
+        }
 
         return response()->json($validated);
     }
