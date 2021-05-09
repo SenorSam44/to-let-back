@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -34,19 +35,22 @@ class AuthController extends Controller
 
 
     private function checkUserForLogin($email, $password){
-        if (auth()->attempt(['email' => $email, 'password' => $password])){
-            $user = auth()->user();
-            $token = $user->createToken('access_token')->accessToken;
-            $credential['token']= $token;
-            $credential['user']= $user;
 
+        $user = User::where('email', $email)->first();
+
+        if ($user && Hash::check($password, $user->password)) {
+            $token = $user->createToken('access_token');
+            $credential['token'] = $token->accessToken;
+            $credential['user'] = $user;
             $user->update([
-                'access_token' => $token
+                'access_token' => $token->accessToken
             ]);
-            return response()->json(['success'=> $credential], 200);
+            return array($credential, 200);
+        } else {
+            $message = 'Password does not match';
         }
 
-        return response()->json('failure', 401);
+        return response()->json($message, 401);
     }
 
 }

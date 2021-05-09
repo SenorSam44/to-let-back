@@ -36,19 +36,7 @@ class ResidenceController extends Controller
     public function store(ResidenceStoreRequest $request)
     {
         $validated = $request->validated();
-//        if (auth('api')->id() != null) {
-//            error_log("if 1");
-//            $user_id = auth('api')->id();
-//        } elseif (Auth::id() != null) {
-//            error_log("if 2");
-//            $user_id = Auth::id();
-//        } elseif (isset($request->user()->id) && $request->user()->id != null) {
-//            error_log("if 3");
-//            $user_id = $request->user()->id;
-//        }else{
-//            $user_id = 1009;
-//        }
-        $validated['owner_id'] = auth('api')->id();
+        $validated['owner_id'] = $request->user()->id;
         Residence::create($validated);
 
         return response()->json($validated);
